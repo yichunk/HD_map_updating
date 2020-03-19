@@ -1,9 +1,9 @@
 [submodule "argoverse-api"]
-	path = argoverse-api
+	path = third_party/argoverse-api
 	url = https://github.com/argoai/argoverse-api
 [submodule "colmap"]
-	path = colmap
+	path = third_party/colmap
 	url = https://github.com/colmap/colmap
 [submodule "ORB_SLAM2"]
-	path = ORB_SLAM2
+	path = third_party/ORB_SLAM2
 	url = https://github.com/raulmur/ORB_SLAM2
