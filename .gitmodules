@@ -1,3 +1,9 @@
 [submodule "argoverse-api"]
 	path = argoverse-api
 	url = https://github.com/argoai/argoverse-api
+[submodule "colmap"]
+	path = colmap
+	url = https://github.com/colmap/colmap
+[submodule "ORB_SLAM2"]
+	path = ORB_SLAM2
+	url = https://github.com/raulmur/ORB_SLAM2
