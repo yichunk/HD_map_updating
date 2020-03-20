@@ -6,4 +6,4 @@
 	url = https://github.com/colmap/colmap
 [submodule "ORB_SLAM2"]
 	path = third_party/ORB_SLAM2
-	url = https://github.com/raulmur/ORB_SLAM2
+	url = https://github.com/Alkaid-Benetnash/ORB_SLAM2
