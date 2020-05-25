@@ -1,0 +1,12 @@
+1.Specify following paths to run colmap:
+$DATABASE_PATH: file to save the intermediate colmap database. Example: $DATABASE_PATH=sample_test/reconstruction/ubuntu_database.db
+$IMAGE_PATH: directory to where the argoverse datasets images are stored. Example:  $IMAGE_PATH=sample_test/images, where sample_test/images contain folders ring_front_center, ring_front_left etc
+$INTERMEDIATE_PATH: an intermediate directory to store binary results. Example: $INTERMEDIATE_PATH=sample_test/reconstruction/sparse/tmp
+$OUTPUT_PATH: directory to save final colmap models, which is input to the 3D projection module. Example: $OUTPUT_PATH=sample_test/reconstruction/sparse/output
+
+2.Run following commands to run colmap
+colmap feature_extractor --database_path $IMAGE_PATH --image_path $IMAGE_PATH --ImageReader.single_camera_per_folder 1
+colmap exhaustive_matcher --database_path $DATABASE_PATH
+colmap mapper --database_path $DATABASE_PATH --image_path $IMAGE_PATH --output_path $INTERMEDIATE_PATH
+colmap model_converter --input_path $INTERMEDIATE_PATH --output_path $OUTPUT_PATH --output_type TXT
+
