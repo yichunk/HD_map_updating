@@ -59,7 +59,6 @@ dependencies:
   - numpy-base=1.18.1=py36hde5b4d6_1
   - olefile=0.46=py36_0
   - opencv=3.4.2=py36h6fd60c2_1
-  - openssl=1.1.1=h7b6447c_0
   - pcre=8.44=he1b5a44_0
   - pillow=7.0.0=py36hb39fc2d_0
   - pip=20.0.2=py36_1
@@ -140,5 +139,5 @@ dependencies:
     - tqdm==4.45.0
     - urllib3==1.25.8
     - yacs==0.1.6
+    - openssl=1.1.1=h7b6447c_0
 prefix: /home/yi-tinglin/anaconda3/envs/detectron
-

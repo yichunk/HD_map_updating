@@ -1,8 +1,8 @@
 # Sign Detector
 
-1. Set up the enviornment: 
+1. Set up the environment: 
 
-   Use environment.yml to build the needed environement
+   Use environment.yml to build the needed environment
 
    ```
    conda env create -f environment.yml
@@ -16,7 +16,7 @@
 
    Put the images in the test_imgs directory
 
-   Excuete the script: python test.py
+   Execute the script: python test.py
 
    Example output result:
 
