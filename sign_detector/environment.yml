@@ -139,5 +139,5 @@ dependencies:
     - tqdm==4.45.0
     - urllib3==1.25.8
     - yacs==0.1.6
-    - openssl=1.1.1=h7b6447c_0
+    - openssl=1.1.1==h7b6447c_0
 prefix: /home/yi-tinglin/anaconda3/envs/detectron
