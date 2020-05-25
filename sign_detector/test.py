@@ -63,6 +63,7 @@ if __name__ == "__main__":
     cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml"))
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.9 # set threshold for this model
     cfg.MODEL.WEIGHTS = "model_final.pth"
+    cfg.MODEL.DEVICE = 'cpu'
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = len(CATEGORIES)
     
     predictor = DefaultPredictor(cfg)
