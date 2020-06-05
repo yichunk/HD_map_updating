@@ -46,10 +46,43 @@
 
    Put the images in the test_imgs directory
 
-   Excuete the script: python test.py
+   Excuete the script: 
 
+   ```
+python test.py
+   ```
+   
    Example output result:
-
+   
    
 
 ![test_out_example](test_out_example.jpg)
+
+#### Train the model
+
+1. Set up the enviornment: 
+
+   Use environment.yml to build the needed environement
+
+   ```
+   conda env create -f environment.yml
+   ```
+
+2. Train the model
+
+   python train.py --path_to_pkl [path_to_the_annotation_file] --output_dir [output directory to store all the outputs]
+
+3. Test on images:
+
+   Put the images in the test_imgs directory
+
+   Excuete the script: 
+
+   ```
+   python test.py
+   ```
+
+   
+
+
+

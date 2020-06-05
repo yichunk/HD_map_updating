@@ -12,7 +12,7 @@ parser.add_argument(
     '--path_to_pkl',
     default='mtsd_fully_annotated/detectron2_annotations/test_6.pkl',
     type=str,
-    help='Path to read the spilt images')
+    help='Path to read the annotation dictionary')
 
 CATEGORIES =  ['stop', 'yield', 'do_not_enter', 'other_regulatory', 'other_prohibitory', 'warning_pedestrians']
 
