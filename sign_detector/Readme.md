@@ -49,7 +49,7 @@
    Excuete the script: 
 
    ```
-python test.py
+   python test.py
    ```
    
    Example output result:
