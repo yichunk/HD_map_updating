@@ -49,7 +49,7 @@
    Excuete the script: 
 
    ```
-python test.py
+   python test.py
    ```
    
    Example output result:
@@ -81,9 +81,9 @@ python test.py
    ```
 
 2. Train the model
-
+   ```
    python train.py --path_to_pkl [path_to_the_annotation_file] --output_dir [output directory to store all the outputs]
-
+   ```
 3. Test on images:
 
    Put the images in the test_imgs directory
