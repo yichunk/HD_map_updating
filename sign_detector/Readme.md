@@ -58,6 +58,18 @@ python test.py
 
 ![test_out_example](test_out_example.jpg)
 
+#### Generate .npz from a sequence
+
+1. Download a test sequence from argoverse dataset: https://www.argoverse.org/data.html#tracking-link
+
+2. Exuete the script to get .npz using the following command:
+
+   ```
+   python gen_npz.py --path_to_pkl [path_to_the_annotation_file] --path_to_model [path_to_the_trained_weights] ----path_to_seq [path_to_the_sequence] --output_dir [output_directory]
+   ```
+
+   Output .npz will be generated under $(output_dir)/record along with the generated output images in .mp4 format
+
 #### Train the model
 
 1. Set up the enviornment: 
@@ -82,7 +94,6 @@ python test.py
    python test.py
    ```
 
-   
 
 
 

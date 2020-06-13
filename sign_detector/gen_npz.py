@@ -37,6 +37,11 @@ parser.add_argument(
     type=str,
     help='Path to read the weights')
 parser.add_argument(
+    '--path_to_seq',
+    default='model_final.pth',
+    type=str,
+    help='Path to read the sequence')
+parser.add_argument(
     '--output_dir',
     default='output_faster_rcnn',
     type=str,
