@@ -11,35 +11,41 @@ from pycococreatortools import pycococreatortools
 import argparse
 
 
+
 parser = argparse.ArgumentParser(description='split images and annotation into target and non-target based on the given imgs and anns')
 parser.add_argument(
     '--path_to_img',
-    default='mtsd_fully_annotated/split_images/test',
+    default='mtsd_fully_annotated/split_images/train',
     type=str,
     help='Path to the orignal images')
 parser.add_argument(
     '--path_to_ann',
-    default='mtsd_fully_annotated/split_annotations/test',
+    default='mtsd_fully_annotated/split_annotations/train',
     type=str,
     help='Path to store the spilt annotations')
 parser.add_argument(
+    '--path_to_crop_object',
+    default='mtsd_fully_annotated/new_split_imgs/train_crop_objects',
+    type=str,
+    help='Path to store the croped objects')
+parser.add_argument(
     '--path_to_target_img',
-    default='mtsd_fully_annotated/new_split_imgs/test_target',
+    default='mtsd_fully_annotated/new_split_imgs/train_target',
     type=str,
     help='Path to store the spilt images')
 parser.add_argument(
     '--path_to_target_ann',
-    default='mtsd_fully_annotated/new_split_anns/test_target',
+    default='mtsd_fully_annotated/new_split_anns/train_target',
     type=str,
     help='Path to store the spilt annotations')
 parser.add_argument(
     '--path_to_non_target_img',
-    default='mtsd_fully_annotated/new_split_imgs/test_non_target',
+    default='mtsd_fully_annotated/new_split_imgs/train_non_target',
     type=str,
     help='Path to store the spilt images')
 parser.add_argument(
     '--path_to_non_target_ann',
-    default='mtsd_fully_annotated/new_split_anns/test_non_target',
+    default='mtsd_fully_annotated/new_split_anns/train_non_target',
     type=str,
     help='Path to store the spilt annotations')
 
@@ -83,6 +89,10 @@ def process_split(args):
     ann_non_target_dest_dir = args.path_to_non_target_ann
     if not os.path.isdir(ann_non_target_dest_dir):
         os.mkdir(ann_non_target_dest_dir)
+    
+    crop_object_dir = args.path_to_crop_object
+    if not os.path.isdir(crop_object_dir):
+        os.mkdir(crop_object_dir)
 
     image_id = 1
 
@@ -96,7 +106,8 @@ def process_split(args):
             #image_info = pycococreatortools.create_image_info(
             #    image_id, os.path.basename(image_filename), image.size)
             #coco_output["images"].append(image_info)
-            
+            im = Image.open(image_filename)
+
             is_target = False
             ann_name = None
             # filter for associated png annotations
@@ -158,14 +169,25 @@ def process_split(args):
 
                         if class_id != -1: #target
                             is_target = True
-                            break
-                        else: #non target
-                            num_object = num_object + 1
+
+                            #Save the crop obejcts
+                            x_min = annotation_data['objects'][num_object]['bbox']['xmin']
+                            y_min = annotation_data['objects'][num_object]['bbox']['ymin']
+
+                            x_max = annotation_data['objects'][num_object]['bbox']['xmax']
+                            y_max = annotation_data['objects'][num_object]['bbox']['ymax']
+                            crop = im.crop((x_min, y_min, x_max, y_max))
+                            save_path = '{}_{}_{}.jpg'.format(image_id, class_id, num_object)
+                            save_path = os.path.join(crop_object_dir, save_path)
+                            print('croped image: {} is saved'.format(save_path))
+                            crop.save(save_path, quality=95)
+
+                        #else: #non target
+                        num_object = num_object + 1
             if len(annotation_files) == 1:
                 filename = image_filename
                 afilename = annotation_files[0]
-                print(filename)
-                print(afilename)
+                
                 if is_target == True:
                     shutil.copy(filename, img_target_dest_dir)
                     shutil.copy(afilename, ann_target_dest_dir) 
@@ -173,7 +195,7 @@ def process_split(args):
                     shutil.copy(filename, img_non_target_dest_dir)
                     shutil.copy(afilename, ann_non_target_dest_dir) 
             
-
+            im.close()
             image_id = image_id + 1
 
 
