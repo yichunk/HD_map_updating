@@ -94,6 +94,15 @@
    python test.py
    ```
 
+#### Run metrics on the model
+
+1. Run metrics: 
+
+   ```
+   python metrics/validate_6.py --path_to_model [path to your model]
+   ```
+
+2. You can get the mAP for each class and the corresponding PR curve
 
 
 
