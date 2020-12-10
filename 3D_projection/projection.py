@@ -1,28 +1,32 @@
 from transforms import affine_matrix_from_points
 from argoverse.data_loading.argoverse_tracking_loader import ArgoverseTrackingLoader
 from scipy.spatial import transform
+import os
 
 #flags that determine which ring cameras to use
 use_fc, use_fl, use_sl, use_rl, use_rr, use_sr, use_fr = [1, 1, 0, 0, 0, 0, 0]
 
 #path to the argoverse dataset
-tracking_dataset_dir = '../argoverse-tracking/sample/'
-
+tracking_dataset_dir = '~/argoverse-tracking/sample/'
+tracking_dataset_dir = os.path.expanduser(tracking_dataset_dir)
 #log_index determines which log in the argoverse dataset directory to use
 #index 0 is the first log in $tracking_dataset_dir, and index 1 is the second log
-log_index = 2
+log_index = 0
 argoverse_loader = ArgoverseTrackingLoader(tracking_dataset_dir)
 log_id = argoverse_loader.log_list[log_index]
 argoverse_data = argoverse_loader[log_index]
 
 #colmap_output_dir points to the results from COLMAP
-colmap_output_dir = 'reconstruction/sparse/' + log_id + '/'
+colmap_output_dir = '~/argoverse-tracking/sample2/output/'
+colmap_output_dir = os.path.expanduser(colmap_output_dir)
 
 #detection results directory
-detection_output_dir = './'
+detection_output_dir = '~/argoverse-tracking/sample2/detector_output/'
+detection_output_dir = os.path.expanduser(detection_output_dir)
 
 #where to save computed traffic sign locations
-location_output_dir = './'
+location_output_dir = '~/argoverse-tracking/sample2/projection_output/'
+location_output_dir = os.path.expanduser(location_output_dir)
 
 
 
@@ -30,7 +34,6 @@ location_output_dir = './'
 #loading argoverse HD map
 import matplotlib
 import matplotlib.pyplot as plt
-from visualize_30hz_benchmark_data_on_map import DatasetOnMapVisualizer
 from argoverse.map_representation.map_api import ArgoverseMap
 am = ArgoverseMap()
 city_name = argoverse_data.city_name
@@ -40,7 +43,6 @@ use_existing_files = True
 import logging
 logger = logging.getLogger()
 logger.setLevel(logging.CRITICAL)
-domv = DatasetOnMapVisualizer(dataset_dir, experiment_prefix, use_existing_files=use_existing_files, log_id=argoverse_data.current_log)
 
 
 
@@ -334,6 +336,8 @@ colmap2argo = M
 colmap_camera_poses = points_3d_colmap
 argo_camera_poses = points_3d_argo
 
+if not os.path.exists(location_output_dir):
+    os.makedirs(location_output_dir)
 np.savez(location_output_dir + log_id+'_projected.npz', 
          argo_mark_poses=argo_mark_poses, 
          colmap_mark_poses=colmap_mark_poses,
