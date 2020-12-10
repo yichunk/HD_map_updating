@@ -1,6 +1,6 @@
 # Sign Detector
 
-#### Build the detectorn2 dictionary file based on the Mapillary Traffic Sign Dataset
+#### Build the detectron2 dictionary file based on the Mapillary Traffic Sign Dataset
 
 1. Request the dataset: https://www.mapillary.com/dataset/trafficsign
 

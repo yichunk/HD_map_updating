@@ -17,15 +17,15 @@ log_id = argoverse_loader.log_list[log_index]
 argoverse_data = argoverse_loader[log_index]
 
 #colmap_output_dir points to the results from COLMAP
-colmap_output_dir = '~/argoverse-tracking/sample2/output/'
+colmap_output_dir = '~/argoverse-tracking/sample/output/'
 colmap_output_dir = os.path.expanduser(colmap_output_dir)
 
 #detection results directory
-detection_output_dir = '~/argoverse-tracking/sample2/detector_output/'
+detection_output_dir = '~/argoverse-tracking/sample/detector_output/'
 detection_output_dir = os.path.expanduser(detection_output_dir)
 
 #where to save computed traffic sign locations
-location_output_dir = '~/argoverse-tracking/sample2/projection_output/'
+location_output_dir = '~/argoverse-tracking/sample/projection_output/'
 location_output_dir = os.path.expanduser(location_output_dir)
 
 
