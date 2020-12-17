@@ -1,6 +1,6 @@
 # Sign Detector
 
-#### Build the detectorn2 dictionary file based on Mapillary Traffic Sign Dataset
+#### Build the detectron2 dictionary file based on the Mapillary Traffic Sign Dataset
 
 1. Request the dataset: https://www.mapillary.com/dataset/trafficsign
 
@@ -46,7 +46,7 @@
 
    Put the images in the test_imgs directory
 
-   Excuete the script: 
+   Execute the script: 
 
    ```
    python test.py
@@ -62,7 +62,7 @@
 
 1. Download a test sequence from argoverse dataset: https://www.argoverse.org/data.html#tracking-link
 
-2. Exuete the script to get .npz using the following command:
+2. Execute the script to get .npz using the following command:
 
    ```
    python gen_npz.py --path_to_pkl [path_to_the_annotation_file] --path_to_model [path_to_the_trained_weights] ----path_to_seq [path_to_the_sequence] --output_dir [output_directory]
@@ -74,7 +74,7 @@
 
 1. Set up the enviornment: 
 
-   Use environment.yml to build the needed environement
+   Use environment.yml to build the needed environment
 
    ```
    conda env create -f environment.yml
@@ -88,7 +88,7 @@
 
    Put the images in the test_imgs directory
 
-   Excuete the script: 
+   Execute the script: 
 
    ```
    python test.py
