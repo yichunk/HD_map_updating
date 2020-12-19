@@ -40,7 +40,10 @@
 
 2. Download model weight:
 
-   Download link: https://drive.google.com/drive/folders/1tF7upcJhw_5rtj11odlgaO4ZlW2AjMPn?usp=sharing
+   Baseline: https://drive.google.com/drive/folders/1tF7upcJhw_5rtj11odlgaO4ZlW2AjMPn?usp=sharing
+   small anchor + focal loss: https://drive.google.com/file/d/17HyArwXlrxiUmz79gu_I_x5VA-leva7i/view?usp=sharing
+   syn data: https://drive.google.com/file/d/1x5mMmyi8t0bard3Jlp6gdwF1Jcm_eLkf/view?usp=sharing
+   
 
 3. Test on images:
 
