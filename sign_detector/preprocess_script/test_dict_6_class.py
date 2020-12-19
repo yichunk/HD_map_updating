@@ -10,7 +10,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Test the detectron2 dictionary file')
 parser.add_argument(
     '--path_to_pkl',
-    default='mtsd_fully_annotated/detectron2_annotations/test_6.pkl',
+    default='mtsd_fully_annotated/detectron2_annotations/train_syn_6.pkl',
     type=str,
     help='Path to read the annotation dictionary')
 
@@ -25,7 +25,7 @@ def load_obj(file_path):
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    file_path = args.path_to_dict
+    file_path = args.path_to_pkl
     DatasetCatalog.register("MTSD_samples", lambda file_path=file_path: load_obj(file_path))
     MetadataCatalog.get("MTSD_samples").set(thing_classes=CATEGORIES)
     Meta_data = MetadataCatalog.get("MTSD_samples")

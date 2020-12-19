@@ -70,7 +70,7 @@ def get_detections(table):
     return res
 
 
-def _compute_ap(recall, precision, label):
+def _compute_ap(recall, precision, label, obj_cate='overall'):
     """ Compute the average precision, given the recall and precision curves.
 
     Code originally from https://github.com/rbgirshick/py-faster-rcnn.
@@ -93,7 +93,7 @@ def _compute_ap(recall, precision, label):
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.title('{} PR curve'.format(label))
-    plt.savefig('{}.jpg'.format(label))
+    plt.savefig('{}_{}.jpg'.format(label, obj_cate))
     plt.close()
     # compute the precision envelope
     for i in range(mpre.size - 1, 0, -1):
@@ -108,7 +108,7 @@ def _compute_ap(recall, precision, label):
     return ap
 
 
-def mean_average_precision_for_boxes(ann, pred, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=True):
+def mean_average_precision_for_boxes(ann, pred, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=True, obj_cate='overall'):
     """
 
     :param ann: path to CSV-file with annotations or numpy array of shape (N, 6)
@@ -231,7 +231,7 @@ def mean_average_precision_for_boxes(ann, pred, iou_threshold=0.5, exclude_not_i
         precision = true_positives / np.maximum(true_positives + false_positives, np.finfo(np.float64).eps)
 
         # compute average precision
-        average_precision = _compute_ap(recall, precision, label)
+        average_precision = _compute_ap(recall, precision, label, obj_cate)
         average_precisions[label] = average_precision, num_annotations
         if verbose:
             s1 = "{:30s} | {:.6f} | {:7d}".format(label, average_precision, int(num_annotations))
