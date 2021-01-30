@@ -29,12 +29,12 @@ from detectron2.data import build_detection_test_loader
 parser = argparse.ArgumentParser(description='Test the detectron2 dictionary file')
 parser.add_argument(
     '--path_to_pkl',
-    default='mtsd_fully_annotated/detectron2_annotations/test_6.pkl',
+    default='mtsd_fully_annotated/detectron2_annotations/train_syn_6.pkl',
     type=str,
     help='Path to read the annotation dictionary')
 parser.add_argument(
     '--output_dir',
-    default='output_faster_rcnn',
+    default='output_syn_data',
     type=str,
     help='Directory to store all the outputs (models, tensorboard files, etc)')
 
@@ -74,7 +74,9 @@ def train(args):
     #cfg.MODEL.WEIGHTS = "detectron2://COCO-Detection/faster_rcnn_R_101_FPN_3x/137851257/model_final_f6e8b1.pkl"
     cfg.SOLVER.IMS_PER_BATCH = 2
     cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
-    cfg.SOLVER.MAX_ITER = 30000   # 300 iterations seems good enough for this toy dataset; you may need to train longer for a practical dataset
+    #cfg.SOLVER.MAX_ITER = 30000   # 300 iterations seems good enough for this toy dataset; you may need to train longer for a practical dataset
+    cfg.SOLVER.MAX_ITER = 180000   # 300 iterations seems good enough for this toy dataset; you may need to train longer for a practical dataset
+    
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = len(CATEGORIES)  # only has one class (ballon)
     cfg.OUTPUT_DIR = output_dir

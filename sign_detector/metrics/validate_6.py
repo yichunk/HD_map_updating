@@ -28,6 +28,7 @@ from map_boxes import mean_average_precision_for_boxes
 import argparse
 
 import os
+import time
 os.environ['QT_QPA_PLATFORM']='offscreen'
 
 
@@ -56,6 +57,11 @@ def validate(cfg, Meta_data, split):
     
     anns = []
     dets = []
+    anns_medium = []
+    dets_medium = []
+    anns_small = []
+    dets_small = []
+    
 
     
     for i, image in enumerate(notation_file):
@@ -82,12 +88,20 @@ def validate(cfg, Meta_data, split):
             ann = [ann_image_id, ann_label_name, ann_bbox[0], ann_bbox[2], ann_bbox[1], ann_bbox[3]]
             #print(ann)
             anns.append(ann)
+
+            if (ann_bbox[2] - ann_bbox[0]) >= 0.02:
+                anns_medium.append(ann)
+            else:
+                anns_small.append(ann)
         
         # processing predictions
         file_name = image['file_name']
         img = cv2.imread(file_name)
-        outputs = predictor(img)
 
+        t0 = time.clock()
+        outputs = predictor(img)
+        t1 = time.clock() - t0
+        print('Exeution time is {}'.format(t1))
         
         scores = outputs["instances"].scores.to('cpu').numpy()
         pred_classes = outputs["instances"].pred_classes.to('cpu').numpy()
@@ -110,10 +124,20 @@ def validate(cfg, Meta_data, split):
             #print(det)
             dets.append(det) 
 
+            if (det_bbox[2] - det_bbox[0]) >= 0.02:
+                dets_medium.append(det)
+            else:
+                dets_small.append(det)
+
 
     # ann = ann[['ImageID', 'LabelName', 'XMin', 'XMax', 'YMin', 'YMax']].values
     # det = det[['ImageID', 'LabelName', 'Conf', 'XMin', 'XMax', 'YMin', 'YMax']].values
+    print("overall_metrics:")
     mean_ap, average_precisions = mean_average_precision_for_boxes(anns, dets)
+    print("small_object_metrics:")
+    mean_average_precision_for_boxes(anns_small, dets_small, obj_cate='small')
+    print("medium_object_metrics:")
+    mean_average_precision_for_boxes(anns_medium, dets_medium, obj_cate='medium')
 
 
 
